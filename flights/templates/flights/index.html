@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Flights</title>
-    </head>
-    <body>
-        {% block body %}
-        {% endblock %}
-    </body>
-</html>
+{% extends "flights/layout.html" %}
+
+{% block body %}
+    <p>Hello, {{request.user.username}}</p>
+    <h1>Flights:</h1>
+    <ul>
+        {% for flight in flights %}
+            <li><a href="{% url 'flight' flight.id %}">Flight {{ flight.id }}: {{ flight.origin }} to {{ flight.dest }}</a></li>
+        {% empty %}
+            <p>No flights found!</p>
+        {% endfor %}
+    </ul>
+{% endblock %}
